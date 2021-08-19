@@ -24,13 +24,21 @@ namespace CP380_B1_BlockList.Models
 
         public void AddBlock(Block block)
         {
-            // TODO
+            block.PreviousHash = Chain[Chain.Count - 1].Hash;
+            block.Mine(Difficulty);
+
+            Chain.Add(block);
         }
 
         public bool IsValid()
         {
-            // TODO
-
+            for (var i = 1; i < Chain.Count; i++)
+            {
+                if (Chain[i].Hash.StartsWith("CC"))
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
